@@ -1,0 +1,9 @@
+/target
+/app/dist
+Cargo.lock
+# Cases stay on the PC they were made on.
+/cases
+*.alibi
+
+# The Windows build is attached to each release, not committed.
+/release/

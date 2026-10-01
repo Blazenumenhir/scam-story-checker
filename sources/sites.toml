@@ -1,0 +1,105 @@
+# Public sources Alibi checks. One [[source]] per site or service.
+#
+# input    what goes into the URL: user, email, phone or domain
+# url      the public page or API, with the input filled in
+# found    how a hit is recognised: an HTTP status, a JSON field or a text marker
+# dates    fields that become points on the Timeline
+# archive  save a Wayback Machine copy of the page as well as the local snapshot
+#
+# Rules for every entry: public pages and public APIs only. No logins, no
+# password-reset or sign-up probing, and no more than `rate` requests a minute.
+
+[[source]]
+name = "GitHub"
+kind = "code"
+input = "user"
+url = "https://api.github.com/users/{user}"
+found = { status = 200 }
+missing = { status = 404 }
+dates = { joined = "created_at" }
+rate = 30
+archive = true
+
+[[source]]
+name = "Bluesky"
+kind = "social"
+input = "user"
+url = "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor={user}.bsky.social"
+found = { status = 200, json = "did" }
+dates = { joined = "createdAt" }
+rate = 60
+archive = true
+
+[[source]]
+name = "Mastodon"
+kind = "social"
+input = "user"
+url = "https://{instance}/.well-known/webfinger?resource=acct:{user}@{instance}"
+found = { status = 200, json = "subject" }
+instances = ["mastodon.social", "mstdn.social", "fosstodon.org"]
+rate = 30
+archive = false
+
+[[source]]
+name = "Gravatar"
+kind = "profile"
+input = "email"
+url = "https://api.gravatar.com/v3/profiles/{email_sha256}"
+found = { status = 200 }
+missing = { status = 404 }
+rate = 60
+archive = false
+
+[[source]]
+name = "Domain record"
+kind = "domain"
+input = "domain"
+url = "https://rdap.org/domain/{domain}"
+found = { status = 200 }
+dates = { registered = "events[eventAction=registration].eventDate", changed = "events[eventAction=last changed].eventDate" }
+fallback = "whois"   # some country domains still answer only WHOIS
+rate = 20
+archive = false
+
+[[source]]
+name = "Certificate log"
+kind = "domain"
+input = "domain"
+url = "https://crt.sh/?q={domain}&output=json"
+found = { status = 200, json = "[0].id" }
+dates = { first_certificate = "min(not_before)" }
+fallback = "https://api.certspotter.com/v1/issuances?domain={domain}"
+rate = 10
+archive = false
+
+[[source]]
+name = "Wayback Machine"
+kind = "history"
+input = "domain"
+url = "https://web.archive.org/cdx/search/cdx?url={domain}&output=json&limit=1"
+found = { status = 200, json = "[1]" }
+dates = { first_seen = "[1][1]" }
+rate = 15
+archive = false
+
+[[source]]
+name = "Mail setup"
+kind = "domain"
+input = "domain"
+url = "https://cloudflare-dns.com/dns-query?name={domain}&type=MX"
+headers = { accept = "application/dns-json" }
+found = { status = 200, json = "Answer" }
+rate = 60
+archive = false
+
+[[source]]
+name = "Breaches"
+kind = "breach"
+input = "email"
+url = "https://haveibeenpwned.com/api/v3/breachedaccount/{email}"
+headers = { "hibp-api-key" = "{settings.hibp_key}" }
+found = { status = 200 }
+missing = { status = 404 }
+needs_key = true     # skipped unless you add your own key in Settings
+rate = 10
+archive = false
