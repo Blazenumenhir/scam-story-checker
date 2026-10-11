@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d1814"/><stop offset="1" stop-color="#0d0b09"/></linearGradient>
+<radialGradient id="lamp" cx="0.16" cy="0.06" r="0.95"><stop offset="0" stop-color="#e9b55a" stop-opacity="0.42"/><stop offset="0.45" stop-color="#e9b55a" stop-opacity="0.1"/><stop offset="1" stop-color="#e9b55a" stop-opacity="0"/></radialGradient>
+<linearGradient id="ink" x1="0.35" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#f8d58e"/><stop offset="0.55" stop-color="#e9b55a"/><stop offset="1" stop-color="#c98d34"/></linearGradient>
+</defs>
+<rect x="40" y="40" width="944" height="944" rx="216" fill="url(#bg)"/>
+<rect x="40" y="40" width="944" height="944" rx="216" fill="url(#lamp)"/>
+<rect x="46" y="46" width="932" height="932" rx="210" fill="none" stroke="#fff" stroke-opacity="0.07" stroke-width="8.0"/>
+<path fill="url(#ink)" transform="translate(287.17 798.00) scale(0.38800 -0.38800)" d="M356.92559814453125 520.2147216796875 377.26324462890625 583.57177734375H1052.9450073242188L1033.27294921875 520.2147216796875ZM1218.8790893554688 68.701171875 1355.8532104492188 22.34088134765625 1348.5155639648438 0H779.6073608398438L787.2794189453125 22.34088134765625L948.9579467773438 65.69793701171875L815.6397094726562 1215.987060546875H841.311767578125L82.6817626953125 70.69146728515625L237.67852783203125 22.34088134765625L230.34088134765625 0H-166.0064697265625L-158.6688232421875 22.34088134765625L7.98382568359375 73.69146728515625L925.2794189453125 1443.311767578125H1044.88232421875Z"/>
+</svg>
