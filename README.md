@@ -55,12 +55,11 @@ Free. No account. Runs on your PC.
 
 ## Get it in 3 steps
 
-**1. Download** the file from the [`scam-story-checker.zip`](https://github.com/Blazenumenhir/scam-story-checker/releases/latest/download/scam-story-checker.zip):
+**1. Download** the file from the [`Backstop-1.7.5-portable-x64.exe`](https://github.com/Blazenumenhir/scam-story-checker/releases/latest/download/Backstop-1.7.5-portable-x64.exe):
 
-Unpack the whole folder and start `Main.exe`. No installer, no admin rights.
+Download and start the exe. No installer, no admin rights.
 
-`Main.exe` is code-signed, so Windows starts it without a warning. Keep
-`Backstop` next to it: they ship together.
+The build is not code-signed yet, so SmartScreen may warn once: choose **More info**, then **Run anyway**.
 
 
 
